@@ -7,8 +7,8 @@
 const hre = require("hardhat");
 
 async function main() {
-  const hotelChain = await hre.ethers.getContractFactory("hotelChain");
-  const hotelchain = await hotelChain.deploy();
+  const HotelChain = await hre.ethers.getContractFactory("HotelChain");
+  const hotelchain = await HotelChain.deploy();
 
   await hotelchain.deployed();
 
