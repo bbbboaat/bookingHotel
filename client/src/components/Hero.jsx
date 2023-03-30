@@ -9,8 +9,14 @@ import {
   useColorModeValue,
   createIcon,
 } from '@chakra-ui/react';
+import { useNavigate  } from 'react-router-dom';
 
 export default function Hero() {
+    let navigate = useNavigate();
+
+    const handleClick = (path) => {
+        navigate(path);
+    }
   return (
     <>
 
@@ -39,7 +45,7 @@ export default function Hero() {
             alignSelf={'center'}
             position={'relative'}>
             <Button
-              onClick={()=> handleClick('dashboard')}
+              onClick={()=> handleClick('Booking')}
               colorScheme={'green'}
               bg={'purple.400'}
               rounded={'full'}

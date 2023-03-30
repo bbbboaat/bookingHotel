@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import Navbar  from './components/Navbar'
 import Home from './components/Home'
+import Booking from './components/Booking'
 import { BrowserRouter as Router , Route , Routes } from 'react-router-dom'
 
 function App() {
@@ -11,8 +12,8 @@ function App() {
     <Router>
     <Navbar />
     <Routes>
-      <Routes exact path="/" element={<Home/>}/>
-      <Routes exact path="/dashboard" element={<Dashboard/>}/>
+      <Route exact path="/" element={<Home/>}/>
+      <Route exact path="/Booking" element={<Booking/>}/>
     </Routes>
     </Router>
     </>
