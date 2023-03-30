@@ -59,10 +59,10 @@ import {
               fontSize={'sm'}
               fontWeight={600}
               color={'white'}
-              bg={'pink.400'}
+              bg={'pink.500'}
               href={'#'}
               _hover={{
-                bg: 'pink.300',
+                bg: 'pink.700',
               }}>
                 Connect Wallet
             </Button>
