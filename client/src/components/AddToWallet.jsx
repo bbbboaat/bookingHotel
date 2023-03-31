@@ -9,7 +9,7 @@ import {
   Flex
 } from '@chakra-ui/react'
 
-export default function PayForm() {
+export default function AddCredit() {
   const {
     handleSubmit,
     register,
@@ -28,26 +28,25 @@ export default function PayForm() {
             fontSize={'x-large'}
             fontWeight={600}
             mb={4}>
-                Make Payment 
+                Add Credit 
         </Text>
-      <FormControl isInvalid={errors.payment}>
+      <FormControl isInvalid={errors.credit}>
         <Input
-          id='payment'
+          id='credit'
           type="number"
           step="any"
-          placeholder='Payment'
-          {...register('payment', {
+          placeholder='Credit'
+          {...register('credit', {
             required: 'This is required'
           })}
         />
         <FormErrorMessage>
-          {errors.payment && errors.payment.message}
+          {errors.credit && errors.credit.message}
         </FormErrorMessage>
       </FormControl>
       <Button mt={4} colorScheme='teal' isLoading={isSubmitting} type='submit'>
         Submit
       </Button>
-      
     </form>
     </Flex>
   )

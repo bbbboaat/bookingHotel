@@ -12,6 +12,7 @@ import {
 
   import { MdAccountBalanceWallet , MdHotel } from 'react-icons/md';
   import { TbReportMoney } from 'react-icons/tb';
+  import AddCredit from './AddToWallet';
   import PayForm from './payForm';
 
   
@@ -82,6 +83,7 @@ import {
         </SimpleGrid>
         <Flex justifyContent={'center'} alignItems={'center'}>
           <PayForm/>
+          <AddCredit/>
         </Flex>
       </Box>
     );
