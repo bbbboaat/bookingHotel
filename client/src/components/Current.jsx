@@ -9,12 +9,11 @@ import {
     useColorModeValue,
   } from '@chakra-ui/react';
   import { ReactNode } from 'react';
-  import { BsPerson } from 'react-icons/bs';
-  import { FiServer } from 'react-icons/fi';
-  import { GoLocation } from 'react-icons/go';
+
   import { MdAccountBalanceWallet , MdHotel } from 'react-icons/md';
   import { TbReportMoney } from 'react-icons/tb';
-  
+  import PayForm from './payForm';
+
   
 
   function StatsCard(props) {
@@ -56,7 +55,7 @@ import {
           fontSize={'4xl'}
           py={10}
           fontWeight={'bold'}>
-          Our company is expanding, you could be too.
+          Lorem ipsum, dolor sit amet consectetur adipisicing.
         </chakra.h1>
         <SimpleGrid columns={{ base: 1, md: 4 }} spacing={{ base: 5, lg: 8 }}>
           <StatsCard
@@ -81,6 +80,9 @@ import {
             // icon={<MdHotel size={'3em'} />}
           />
         </SimpleGrid>
+        <Flex justifyContent={'center'} alignItems={'center'}>
+          <PayForm/>
+        </Flex>
       </Box>
     );
   }
