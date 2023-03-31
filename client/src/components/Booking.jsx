@@ -1,7 +1,8 @@
+import Current from "./Current"
 
 const Booking = () => {
     return (
-        <h1> Booking Jaaaa</h1>
+        <Current/>
     )
 }
 
