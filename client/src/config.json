@@ -311,5 +311,6 @@
           "stateMutability": "view",
           "type": "function"
         }
-      ]
+      ],
+      "contractAddress": "0x665E6d726A0b59E9F639215846dCa5d51bEeA98a"
 }
