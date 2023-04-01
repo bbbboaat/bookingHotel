@@ -9,6 +9,7 @@ const Room = ({room}) => {
             </Text>
             <Stack spacing={0} direction={'row'} align={'center'} justify={'center'} mt={5} >
             <Button
+              m={2}
               colorScheme={'green'}
               bg={'purple.400'}
               rounded={'full'}
@@ -19,6 +20,7 @@ const Room = ({room}) => {
               Check In
             </Button>
             <Button
+              m={2}
               colorScheme={'green'}
               bg={'purple.400'}
               rounded={'full'}
