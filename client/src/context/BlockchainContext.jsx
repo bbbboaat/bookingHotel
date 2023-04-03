@@ -1,4 +1,4 @@
-import React , { useState } from 'react';
+import React , { useEffect, useState } from 'react';
 import { abi , contractAddress } from '../config.json'
 import { ethers } from "ethers";
 
@@ -25,6 +25,27 @@ export const BlockchainProvider = ({children}) => {
             throw new Error("No etheruem object")
         }
     }
+
+    const checkWalletConnect = async () => {
+        try{
+            if(!window.ethereum) return alert("Please install Metamask")
+
+            const account = await provider.send("eth_accounts");
+            if(account.length){
+                setCurrentAccount(account[0])
+            } else {
+                console.log("No accounts found")
+            }
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+
+    useEffect(() => {
+        checkWalletConnect()
+    } , [])
+
 
     return (
         <BlockchainContext.Provider
