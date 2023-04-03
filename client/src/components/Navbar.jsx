@@ -69,7 +69,7 @@ import {
               _hover={{
                 bg: 'teal.700',
               }}>
-                Connect Wallet
+                {!currentAccount ? "Connect Wallet" : `${currentAccount.slice(0,5)}...${currentAccount.slice(currentAccount.length -4 )}`}
             </Button>
           </Stack>
         </Flex>
