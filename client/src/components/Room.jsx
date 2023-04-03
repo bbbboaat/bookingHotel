@@ -11,22 +11,22 @@ const Room = ({room}) => {
             <Button
               m={2}
               colorScheme={'green'}
-              bg={'purple.400'}
+              bg={'teal.500'}
               rounded={'full'}
               px={6}
               _hover={{
-                bg: 'purple.500'
+                bg: 'teal.700'
               }}>
               Check In
             </Button>
             <Button
               m={2}
               colorScheme={'green'}
-              bg={'purple.400'}
+              bg={'teal.500'}
               rounded={'full'}
               px={6}
               _hover={{
-                bg: 'purple.500'
+                bg: 'teal.700'
               }}>
               Check Out
             </Button>
