@@ -6,6 +6,8 @@ export const BlockchainContext = React.createContext();
 
 export const BlockchainProvider = ({children}) => {
     const [currentAccount , setCurrentAccount] = useState("");
+    const [balance , setBalance] = useState();  
+    
     const provider = new ethers.providers.Web3Provider(window.ethereum)
     const signer = provider.getSigner()
 
@@ -41,9 +43,18 @@ export const BlockchainProvider = ({children}) => {
         }
     }
 
+    const getBalance = async() =>{
+        try {
+            const contractBalance = await contract.balanceOf();
+            setBalance(ethers.utils.formatEther(contractBalance))
+        } catch(error){
+            console.log(error)
+        }
+    }
 
     useEffect(() => {
         checkWalletConnect()
+        getBalance()
     } , [])
 
 
