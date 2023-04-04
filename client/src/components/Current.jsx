@@ -82,8 +82,8 @@ import {
           />
         </SimpleGrid>
         <Flex justifyContent={'center'} alignItems={'center'}>
-          <PayForm/>
           <AddCredit/>
+          <PayForm/>
         </Flex>
       </Box>
     );

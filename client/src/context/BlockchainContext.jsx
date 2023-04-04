@@ -2,11 +2,13 @@ import React , { useEffect, useState } from 'react';
 import { abi , contractAddress } from '../config.json'
 import { ethers } from "ethers";
 
-export const BlockchainContext = React.createContext();
+export const BlockchainContext = React.createContext("");
 
 export const BlockchainProvider = ({children}) => {
     const [currentAccount , setCurrentAccount] = useState("");
     const [balance , setBalance] = useState();  
+    const [renterExists , setRenterExist] = useState();
+    const [renter , setRenter] = useState();
     
     const provider = new ethers.providers.Web3Provider(window.ethereum)
     const signer = provider.getSigner()
@@ -52,9 +54,34 @@ export const BlockchainProvider = ({children}) => {
         }
     }
 
+    const checkRenterExists = async() => {
+        try{ 
+            const renter = await contract.renterExists(currentAccount)
+            setRenterExist(renter);
+            if(renter) {
+                await getRenter();
+            }
+        }catch(error) {
+            console.log(error)
+        }
+    }
+
+    const getRenter = async () => {
+        try{ 
+            const renter = await contract.getRenter(currentAccount)
+            set
+            if(renter) {
+                await getRenter();
+            }
+        }catch(error) {
+            console.log(error)
+        }
+    }
+
+
     useEffect(() => {
         checkWalletConnect()
-        getBalance()
+        checkRenterExists()
     } , [])
 
 
@@ -62,7 +89,9 @@ export const BlockchainProvider = ({children}) => {
         <BlockchainContext.Provider
             value={{
                 connectWallet,
-                currentAccount
+                currentAccount,
+                renterExists
+
             }}>
                 { children }
         </BlockchainContext.Provider>
