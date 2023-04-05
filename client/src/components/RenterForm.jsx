@@ -28,10 +28,13 @@ export default function RenterForm() {
     values[`start`] = 0;
     values[`end`] = 0;
     const newValuesObject = {walletAddress:currentAccount, ...values}
+    const {walletAddress, firstname, lastname , canRent , active,balance,due,start,end} = newValuesObject
+    await addRenter(walletAddress, firstname, lastname , canRent , active,balance,due,start,end)
+    
 
-    console.log(newValuesObject)
+    // console.log(newValuesObject)
 
-    console.log(JSON.stringify(values, null, 2))
+    // console.log(JSON.stringify(values, null, 2))
   }
 
   return (
