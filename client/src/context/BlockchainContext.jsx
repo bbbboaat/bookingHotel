@@ -103,7 +103,7 @@ export const BlockchainProvider = ({children}) => {
         }
     }
 
-    const deposit = async() => {
+    const deposit = async(value) => {
         try{
             const bnbValue = ethers.utils.parseEther(value)
             const deposit = await contract.deposit(currentAccount , {value : bnbValue})

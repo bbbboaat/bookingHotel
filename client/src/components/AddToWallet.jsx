@@ -8,8 +8,11 @@ import {
   Text,
   Flex
 } from '@chakra-ui/react'
+import { useContext } from 'react'
+import { BlockchainContext } from '../context/BlockchainContext'
 
 export default function AddCredit() {
+  const {deposit} = useContext(BlockchainContext)
   const {
     handleSubmit,
     register,
@@ -18,6 +21,8 @@ export default function AddCredit() {
 
   const onSubmit = async (values)=> {
     console.log(JSON.stringify(values, null, 2))
+    const {credit} = values;
+    await deposit(credit);
   }
 
   return (
