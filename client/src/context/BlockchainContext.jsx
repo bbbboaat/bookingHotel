@@ -9,6 +9,7 @@ export const BlockchainProvider = ({children}) => {
     const [balance , setBalance] = useState()
     const [renterExists , setRenterExists] = useState()
     const [renter , setRenter] = useState()
+    const [renterBalance , setRenterBalance] = useState()
     
     const provider = new ethers.providers.Web3Provider(window.ethereum)
     const signer = provider.getSigner()
@@ -56,11 +57,12 @@ export const BlockchainProvider = ({children}) => {
 
     const checkRenterExists = async () => {
         try{
-            console.log(`Current Account: ${currentAccount}`)
-            const renter = await contract.rentersExists(currentAccount) // wrong contract setting rentersExist
-            setRenterExists(renter);
-            if(renter) {
-                await getRenter();
+            if(currentAccount) { 
+                const renter = await contract.rentersExists(currentAccount) // wrong contract setting rentersExist
+                setRenterExists(renter);
+                if(renter) {
+                    await getRenter();
+                }
             }
     } catch (error) {
             console.log(error)
@@ -69,8 +71,10 @@ export const BlockchainProvider = ({children}) => {
 
     const getRenter = async () => {
         try{ 
-            const renter = await contract.getRenter(currentAccount)
-            setRenter(renter)
+            if(currentAccount) {
+                const renter = await contract.getRenter(currentAccount)
+                setRenter(renter)
+            }
         } catch (error) {
             console.log(error)
         }
@@ -87,10 +91,23 @@ export const BlockchainProvider = ({children}) => {
         }
     }
 
+    const getRenterBalance = async() => {
+        try{
+            if (currentAccount) {
+                
+                const balance = await contract.balanceOfRenter(currentAccount)
+                setRenterBalance(ethers.utils.formatEther(balance))
+            }
+        }catch(error) {
+            console.log(error)
+        }
+    }
+
 
     useEffect(() => {
         checkWalletConnect()
         checkRenterExists()
+        getRenterBalance()
     } , [currentAccount])
 
 
@@ -100,7 +117,8 @@ export const BlockchainProvider = ({children}) => {
                 connectWallet,
                 currentAccount,
                 renterExists,
-                addRenter
+                addRenter,
+                renterBalance
 
             }}>
                 { children }

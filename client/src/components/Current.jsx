@@ -8,10 +8,11 @@ import {
     StatNumber,
     useColorModeValue,
   } from '@chakra-ui/react';
-  import { ReactNode } from 'react';
+  import { ReactNode , useContext} from 'react';
 
   import { MdAccountBalanceWallet , MdHotel } from 'react-icons/md';
   import { TbReportMoney } from 'react-icons/tb';
+import { BlockchainContext } from '../context/BlockchainContext';
   import AddCredit from './AddToWallet';
   import PayForm from './payForm';
 
@@ -49,6 +50,7 @@ import {
   }
   
   export default function Current() {
+    const {renterBalance} = useContext(BlockchainContext)
     return (
       <Box maxW="7xl" mx={'auto'} pt={5} px={{ base: 2, sm: 12, md: 17 }}>
         <chakra.h1
@@ -61,7 +63,7 @@ import {
         <SimpleGrid columns={{ base: 1, md: 4 }} spacing={{ base: 5, lg: 8 }}>
           <StatsCard
             title={'Your Wallet'}
-            stat={'5,000'}
+            stat={renterBalance}
             icon={<MdAccountBalanceWallet size={'3em'} />}
           />
           <StatsCard
