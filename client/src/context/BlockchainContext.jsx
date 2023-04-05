@@ -103,6 +103,16 @@ export const BlockchainProvider = ({children}) => {
         }
     }
 
+    const deposit = async() => {
+        try{
+            const bnbValue = ethers.utils.parseEther(value)
+            const deposit = await contract.deposit(currentAccount , {value : bnbValue})
+            await deposit.wait()
+            await getRenterBalance();
+        }catch(error) {
+            console.log(error)
+        }
+    }
 
     useEffect(() => {
         checkWalletConnect()
@@ -118,7 +128,8 @@ export const BlockchainProvider = ({children}) => {
                 currentAccount,
                 renterExists,
                 addRenter,
-                renterBalance
+                renterBalance,
+                deposit
 
             }}>
                 { children }
