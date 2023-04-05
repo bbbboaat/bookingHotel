@@ -6,9 +6,9 @@ export const BlockchainContext = React.createContext("");
 
 export const BlockchainProvider = ({children}) => {
     const [currentAccount , setCurrentAccount] = useState("");
-    const [balance , setBalance] = useState();  
-    const [renterExists , setRenterExist] = useState();
-    const [renter , setRenter] = useState();
+    const [balance , setBalance] = useState()
+    const [renterExists , setRenterExists] = useState()
+    const [renter , setRenter] = useState()
     
     const provider = new ethers.providers.Web3Provider(window.ethereum)
     const signer = provider.getSigner()
@@ -54,14 +54,15 @@ export const BlockchainProvider = ({children}) => {
         }
     }
 
-    const checkRenterExists = async() => {
-        try{ 
-            const renter = await contract.renterExists(currentAccount)
-            setRenterExist(renter);
+    const checkRenterExists = async () => {
+        try{
+            console.log(`Current Account: ${currentAccount}`)
+            const renter = await contract.rentersExists(currentAccount) // wrong contract setting rentersExist
+            setRenterExists(renter);
             if(renter) {
                 await getRenter();
             }
-        }catch(error) {
+    } catch (error) {
             console.log(error)
         }
     }
@@ -69,11 +70,19 @@ export const BlockchainProvider = ({children}) => {
     const getRenter = async () => {
         try{ 
             const renter = await contract.getRenter(currentAccount)
-            set
-            if(renter) {
-                await getRenter();
-            }
-        }catch(error) {
+            setRenter(renter)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    const addRenter = async (walletAddress,firstName,lastName,canRent,active,balance,due,start,end) => {
+        try{ 
+            const addRenter = await contract.addRenter(walletAddress,firstName,lastName,canRent,active,balance,due,start,end)
+            await addRenter.wait()
+            console.log(`${firstName} added`)
+            checkRenterExists()
+        } catch (error) {
             console.log(error)
         }
     }
@@ -82,7 +91,7 @@ export const BlockchainProvider = ({children}) => {
     useEffect(() => {
         checkWalletConnect()
         checkRenterExists()
-    } , [])
+    } , [currentAccount])
 
 
     return (
@@ -90,7 +99,8 @@ export const BlockchainProvider = ({children}) => {
             value={{
                 connectWallet,
                 currentAccount,
-                renterExists
+                renterExists,
+                addRenter
 
             }}>
                 { children }

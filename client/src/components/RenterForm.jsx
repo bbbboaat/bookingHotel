@@ -8,8 +8,12 @@ import {
   Text,
   Flex
 } from '@chakra-ui/react'
+import { useContext } from 'react'
+import { BlockchainContext } from '../context/BlockchainContext'
 
 export default function RenterForm() {
+  const { addRenter , currentAccount} = useContext(BlockchainContext)
+
   const {
     handleSubmit,
     register,
@@ -17,6 +21,16 @@ export default function RenterForm() {
   } = useForm()
 
   const onSubmit = async (values)=> {
+    values[`canRent`] = true;
+    values[`active`] = false;
+    values[`balance`] = 0;
+    values[`due`] = 0;
+    values[`start`] = 0;
+    values[`end`] = 0;
+    const newValuesObject = {walletAddress:currentAccount, ...values}
+
+    console.log(newValuesObject)
+
     console.log(JSON.stringify(values, null, 2))
   }
 
