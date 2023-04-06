@@ -49,7 +49,7 @@ contract HotelChain {
     }
 
     // Checkout Hotel
-    function Checkout(address walletAddress) public {
+    function checkOut(address walletAddress) public {
         require(renters[walletAddress].due == 0, "You have a pending balance");
         require(renters[walletAddress].canRent == true, "can rent this time");
         renters[walletAddress].active = true;
@@ -59,7 +59,7 @@ contract HotelChain {
 
     // Check in Hotel
     function checkIn(address walletAddress) public {
-        require(renters[walletAddress].active == false, "check out first");
+        require(renters[walletAddress].active == true, "check out first");
         renters[walletAddress].active = false;
         renters[walletAddress].end = block.timestamp;
         setDue(walletAddress);

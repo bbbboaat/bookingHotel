@@ -50,7 +50,7 @@ import { BlockchainContext } from '../context/BlockchainContext';
   }
   
   export default function Current() {
-    const {renterBalance , due} = useContext(BlockchainContext)
+    const {renterBalance , due , totalDuration , renter} = useContext(BlockchainContext)
     return (
       <Box maxW="7xl" mx={'auto'} pt={5} px={{ base: 2, sm: 12, md: 17 }}>
         <chakra.h1
@@ -73,12 +73,12 @@ import { BlockchainContext } from '../context/BlockchainContext';
           />
           <StatsCard
             title={'length of stay'}
-            stat={'7'}
+            stat={totalDuration}
             icon={<MdHotel size={'3em'} />}
           />
           <StatsCard
             title={'Room Status'}
-            bgColor={'red.300'}
+            bgColor={renter && renter.active ? 'green.300' : 'red.300'}
             // stat={'7'}
             // icon={<MdHotel size={'3em'} />}
           />

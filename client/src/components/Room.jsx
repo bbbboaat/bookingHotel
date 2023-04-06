@@ -1,6 +1,9 @@
 import { Stack,Box,Image,Button,Text } from "@chakra-ui/react"
+import { useContext } from "react"
+import { BlockchainContext } from "../context/BlockchainContext"
 
 const Room = ({room}) => {
+  const {checkIn,Checkout} = useContext(BlockchainContext)
     return(
         <Box boxSize='lg' mx={2}>
             <Image src={room} mb={10} />
@@ -9,6 +12,7 @@ const Room = ({room}) => {
             </Text>
             <Stack spacing={0} direction={'row'} align={'center'} justify={'center'} mt={5} >
             <Button
+              onClick={checkIn}
               m={2}
               colorScheme={'green'}
               bg={'teal.500'}
@@ -20,6 +24,7 @@ const Room = ({room}) => {
               Check In
             </Button>
             <Button
+              onClick={Checkout}
               m={2}
               colorScheme={'green'}
               bg={'teal.500'}
