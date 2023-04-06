@@ -10,6 +10,7 @@ export const BlockchainProvider = ({children}) => {
     const [renterExists , setRenterExists] = useState()
     const [renter , setRenter] = useState()
     const [renterBalance , setRenterBalance] = useState()
+    const [due , setDue] = useState()
     
     const provider = new ethers.providers.Web3Provider(window.ethereum)
     const signer = provider.getSigner()
@@ -114,10 +115,20 @@ export const BlockchainProvider = ({children}) => {
         }
     }
 
+    const getDue = async(value) => {
+        try{
+            const due = await contract.getDue(currentAccount)
+            setDue(ethers.utils.formatEther(due));
+        }catch(error) {
+            console.log(error)
+        }
+    }
+
     useEffect(() => {
         checkWalletConnect()
         checkRenterExists()
         getRenterBalance()
+        getDue()
     } , [currentAccount])
 
 
@@ -129,7 +140,8 @@ export const BlockchainProvider = ({children}) => {
                 renterExists,
                 addRenter,
                 renterBalance,
-                deposit
+                deposit,
+                due
 
             }}>
                 { children }

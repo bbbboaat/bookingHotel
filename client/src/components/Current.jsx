@@ -50,7 +50,7 @@ import { BlockchainContext } from '../context/BlockchainContext';
   }
   
   export default function Current() {
-    const {renterBalance} = useContext(BlockchainContext)
+    const {renterBalance , due} = useContext(BlockchainContext)
     return (
       <Box maxW="7xl" mx={'auto'} pt={5} px={{ base: 2, sm: 12, md: 17 }}>
         <chakra.h1
@@ -68,7 +68,7 @@ import { BlockchainContext } from '../context/BlockchainContext';
           />
           <StatsCard
             title={'BNB Due'}
-            stat={'1'}
+            stat={due}
             icon={<TbReportMoney size={'3em'} />}
           />
           <StatsCard
