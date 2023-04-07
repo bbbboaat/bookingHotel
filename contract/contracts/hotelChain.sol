@@ -6,6 +6,7 @@ contract HotelChain {
     address owner;
 
     constructor() {
+        //address of the account from wher the function call
         owner = msg.sender;
     }
 
@@ -49,9 +50,9 @@ contract HotelChain {
     }
 
     // Checkout Hotel
-    function checkOut(address walletAddress) public {
+    function Checkout(address walletAddress) public {
         require(renters[walletAddress].due == 0, "You have a pending balance");
-        require(renters[walletAddress].canRent == true, "can rent this time");
+        require(renters[walletAddress].canRent == true, "can't rent this time");
         renters[walletAddress].active = true;
         renters[walletAddress].start = block.timestamp;
         renters[walletAddress].canRent = false;
@@ -66,28 +67,27 @@ contract HotelChain {
     }
 
     // Get total duration of renting
-    function rentersTimespan(
-        uint start,
-        uint end
-    ) internal pure returns (uint) {
+    function renterTimespan(uint start, uint end) internal pure returns (uint) {
         return end - start;
     }
 
     function getTotalDuration(
         address walletAddress
     ) public view returns (uint) {
+        require(renters[walletAddress].active == false);
         if (
             renters[walletAddress].start == 0 || renters[walletAddress].end == 0
         ) {
             return 0;
         } else {
-            uint timespan = rentersTimespan(
+            uint timespan = renterTimespan(
                 renters[walletAddress].start,
                 renters[walletAddress].end
             );
             uint timespanInMinutes = timespan / 60;
             return timespanInMinutes;
         }
+        // return 2;
     }
 
     // Get contract balace
@@ -103,8 +103,8 @@ contract HotelChain {
     // Set Due amount
     function setDue(address walletAddress) internal {
         uint timespanInMinutes = getTotalDuration(walletAddress);
-        uint oneMinuteIncrements = timespanInMinutes / 60;
-        renters[walletAddress].due = oneMinuteIncrements * 3000000000000000;
+        uint oneMinuteIncrements = timespanInMinutes / 1;
+        renters[walletAddress].due = oneMinuteIncrements * 30000000000000000;
     }
 
     function canRentHotel(address walletAddress) public view returns (bool) {
@@ -112,6 +112,7 @@ contract HotelChain {
     }
 
     // Doptsit
+    //amount of currency by the msg.sender e
     function deposit(address walletAddress) public payable {
         renters[walletAddress].balance += msg.value;
     }

@@ -73,7 +73,7 @@ import { BlockchainContext } from '../context/BlockchainContext';
           />
           <StatsCard
             title={'length of stay'}
-            stat={totalDuration}
+            stat={totalDuration + ' '}
             icon={<MdHotel size={'3em'} />}
           />
           <StatsCard
